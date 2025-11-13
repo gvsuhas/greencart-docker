@@ -1,0 +1,22 @@
+version: "3.9"
+
+services:
+  server:
+    build: ./server
+    container_name: greencart_server
+    restart: always
+    ports:
+      - "4000:4000"
+    env_file:
+      - ./server/.env
+    environment:
+      - NODE_ENV=development
+
+  client:
+    build: ./client
+    container_name: greencart_client
+    restart: always
+    ports:
+      - "5173:5173"
+    depends_on:
+      - server
